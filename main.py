@@ -6,23 +6,32 @@ import sys
 import argparse
 import os.path
 import cli
+import time
+import constants
 
 def parseArguments():
+    """Parses command lines arguments and returns a Namespace object
+    if successful, an error otherwise
+    """
     parser = cli.buildParser()
     return parser.parse_args()
 
 if (__name__ == "__main__"):
     namespace = parseArguments()
-    localFolder = namespace.__getattribute__("local_folder")
-    logFile = namespace.__getattribute__("log_file")
-    ftpServerUrl = namespace.__getattribute__("ftp_server_url")
-    username = namespace.__getattribute__("username")
-    password = namespace.__getattribute__("password")
-    debugMode = namespace.__getattribute__("debug")
     print(namespace._get_args)
-    refreshFrequency = namespace.__getattribute__("refresh_frequency")
-    maxDepth = namespace.__getattribute__("max_depth")
+    localFolder = namespace.__getattribute__(constants.LOCAL_FOLDER_OPTION)
+    logFile = namespace.__getattribute__(constants.LOG_FILE_OPTION)
+    ftpServerUrl = namespace.__getattribute__(constants.FTP_SERVER_URL_OPTION)
+    username = namespace.__getattribute__(constants.USERNAME_OPTION)
+    password = namespace.__getattribute__(constants.PASSWORD_OPTION)
+    refreshFrequency = namespace.__getattribute__(constants.REFRESH_FREQUENCY_OPTION)
+    maxDepth = namespace.__getattribute__(constants.MAX_DEPTH_OPTION)
+    debugMode = namespace.__getattribute__(constants.DEBUG_OPTION)
 
     ftpClient = FTP(ftpServerUrl)
     ftpClient.login(user=username, passwd=password)
-    print(ftpClient.pwd())
+
+    for root, dirs, files in os.walk(localFolder):
+        print("(" + root + ", " + dirs + ", " + files + ")")
+    while (True):
+        time.sleep(refreshFrequency)
