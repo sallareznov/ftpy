@@ -10,7 +10,7 @@ import time
 import constants
 
 def parseArguments():
-    """Parses command lines arguments and returns a Namespace object
+    """Parses command line arguments and returns a Namespace object
     if successful, an error otherwise
     """
     parser = cli.buildParser()
@@ -31,7 +31,8 @@ if (__name__ == "__main__"):
     ftpClient = FTP(ftpServerUrl)
     ftpClient.login(user=username, passwd=password)
 
-    # for root, dirs, files in os.walk(localFolder):
-    #     print("(" + root + ", " + dirs + ", " + files + ")")
-    # while (True):
-    #     time.sleep(refreshFrequency)
+    for root, dirs, files in os.walk(localFolder):
+        ftpClient.mkd(root)
+        for filename in files:
+            filepath = root + os.pathsep + filename
+            ftpClient.storlines("STOR " + filepath, open(filepath))
