@@ -27,7 +27,6 @@ def isNew(path, timestampBeforeRefresh):
 
 def addFolder(folderState, ftpClient):
     """Add a folder to the server"""
-    print("adding")
     for root, dirs, files in folderState:
         ftpClient.mkd(root)
         for filename in files:
