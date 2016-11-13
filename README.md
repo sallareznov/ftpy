@@ -14,9 +14,9 @@ saves and synchronizes a local folder with a FTP server
 positional arguments:
   local_folder          the local folder
   log_file              the log file
-  ftp_server_url        the url of the FTP server
-  username              the username of the account in the FTP server
-  password              the password of the account in the FTP server
+  ftp_server_url        the location of the server
+  username              the username of the account in the server
+  password              the password of the account in the server
 
 optional arguments:
   -h, --help            show this help message and exit
