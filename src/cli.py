@@ -2,6 +2,7 @@ import argparse
 import constants
 
 def buildParser():
+    """Builds the parser"""
     parser = argparse.ArgumentParser(description="saves and synchronizes a local folder with a FTP server")
     parser.add_argument(constants.LOCAL_FOLDER_OPTION, help="the local folder to save and synchronize with the server")
     parser.add_argument(constants.LOG_FILE_OPTION, help="the log file")
