@@ -1,3 +1,4 @@
+# defining constants
 LOCAL_FOLDER_OPTION="local_folder"
 LOG_FILE_OPTION="log_file"
 FTP_SERVER_URL_OPTION="ftp_server_url"

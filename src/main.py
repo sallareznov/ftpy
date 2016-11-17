@@ -23,10 +23,12 @@ def isNew(path, timestampBeforeRefresh):
     """Returns True if the entry has been created, modified or delete between
     two refreshes
     """
+    # an entry is new if its last modification is newer than the last date of refresh
     return (os.path.getctime(path) > timestampBeforeRefresh)
 
 def addFolder(folderState, ftpClient):
     """Add a folder to the server"""
+    # for all subfolders of the folder, add the folder and the content to the server
     for root, dirs, files in folderState:
         ftpClient.mkd(root)
         for filename in files:
